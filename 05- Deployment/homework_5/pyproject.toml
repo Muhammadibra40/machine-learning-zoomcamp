@@ -3,11 +3,11 @@ name = "homework-5"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.120.0",
-    "numpy>=2.3.4",
     "pandas>=2.3.3",
+    "pydantic>=2.12.3",
     "scikit-learn==1.6.1",
     "uvicorn>=0.38.0",
 ]

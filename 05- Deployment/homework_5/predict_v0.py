@@ -1,6 +1,7 @@
 import pickle
 from typing import Literal
 from pydantic import BaseModel, Field
+import pandas as pd
 
 
 from fastapi import FastAPI
@@ -25,14 +26,15 @@ class PredictResponse(BaseModel):
 
 app = FastAPI(title="lead-conversion-prediction")
 
-with open('pipeline_v2.bin', 'rb') as f_in:
+with open('pipeline_v1.bin', 'rb') as f_in:
     pipeline = pickle.load(f_in)
 
 
 
 
-def predict_single(lead):
-    result = pipeline.predict_proba(lead)[0, 1]
+def predict_single(lead_data: dict):
+    df = pd.DataFrame([lead_data])
+    result = pipeline.predict_proba(df)[0, 1]
     return float(result)
 
 
@@ -48,3 +50,25 @@ def predict(lead: lead) -> PredictResponse:
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=9696)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
